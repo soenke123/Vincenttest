@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>guter-reitstall.de – modernisiert</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--sand:#fdfbf7;--sand2:#f3efe9;--forest:#1c2a21;--green:#2c4a3b;--clay:#a85a42;--ink:#1a241f;--muted:#4a524d;--line:#e5e0d8}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 8% 8%,rgba(168,90,66,.12),transparent 28rem),var(--sand);color:var(--ink);font-family:Outfit,sans-serif}a{color:inherit;text-decoration:none}header{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,4rem);border-bottom:1px solid var(--line);background:rgba(253,251,247,.9);backdrop-filter:blur(16px)}.brand{display:flex;align-items:center;gap:.75rem;font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2vw,1.8rem);font-weight:700}.brand img{width:3rem;height:3rem;border:1px solid var(--line);object-fit:cover}nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.3rem}nav a{padding:.65rem .8rem;color:var(--muted);font-size:.82rem;transition:all 0.2s ease}nav a:hover{background:var(--green);color:var(--sand)}
+
+/* Styling für den aktiven Menüpunkt (Tab-Indikator) */
+nav a.active-link {
+  background: var(--green);
+  color: var(--sand);
+}
+
+/* Hamburger Menü Button */
+.menu-toggle{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;background:transparent;border:none;cursor:pointer;padding:0;z-index:30}
+.menu-toggle span{display:block;width:100%;height:2px;background-color:var(--ink);transition:transform 0.3s ease,opacity 0.3s ease}
+.header-open .menu-toggle span:nth-child(1){transform:translateY(9px) rotate(45deg)}
+.header-open .menu-toggle span:nth-child(2){opacity:0}
+.header-open .menu-toggle span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}
+
+/* Tab-Logik: Standardmäßig ausblenden */
+.hero, .page-section, .gallery {
+  display: none;
+}
+/* Nur einblenden, wenn der Tab aktiv ist */
+.hero.active-tab, .page-section.active-tab {
+  display: grid;
+}
+.gallery.active-tab {
+  display: block;
+}
+
+.hero{grid-template-columns:minmax(20rem,.82fr) minmax(24rem,1.18fr);gap:clamp(4rem,8vw,7rem);align-items:center;width:min(1180px,calc(100% - 2rem));min-height:calc(100vh - 84px);margin:0 auto;padding:clamp(5rem,9vw,8rem) 0}.eyebrow{color:var(--clay);font-size:.78rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}h1,h2{font-family:'Cormorant Garamond',serif;letter-spacing:-.055em;line-height:.92}h1{max-width:9.5ch;margin:.45rem 0 1.25rem;font-size:clamp(3.6rem,7.2vw,6.7rem)}h2{margin:.4rem 0 1.25rem;font-size:clamp(3rem,6vw,5.8rem)}p{color:var(--muted);font-size:clamp(1rem,1.35vw,1.15rem);line-height:1.85}.hero figure,.page-section figure{margin:0;border:1px solid var(--line);background:var(--sand2);overflow:hidden}.hero img,.page-section img{width:100%;height:100%;object-fit:cover;display:block}.hero figure{aspect-ratio:4/5}.page-section {grid-template-columns:minmax(20rem,.82fr) minmax(24rem,1.18fr);gap:clamp(4rem,8vw,7rem);align-items:start;width:min(1180px,calc(100% - 2rem));margin:0 auto;padding:clamp(4rem,8vw,7rem) 0;border-top:1px solid var(--line)}.page-section .copy{position:relative;z-index:2}.page-section figure{aspect-ratio:16/12;position:sticky;top:7rem}figcaption{padding:1rem;color:var(--forest);font-weight:700}.gallery{width:min(1180px,calc(100% - 2rem));margin:0 auto;padding:4rem 0 7rem;border-top:1px solid var(--line)}.image-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.image-grid img{width:100%;aspect-ratio:1/1;object-fit:cover;border:1px solid var(--line);background:var(--sand2)}footer{display:grid;grid-template-columns:1fr minmax(18rem,.55fr);gap:4rem;padding:clamp(5rem,10vw,8rem) clamp(1rem,4vw,4rem);background:var(--forest);color:var(--sand)}footer h2{color:var(--sand)}footer p,footer a{color:rgba(253,251,247,.78)}
+
+@media(max-width:1000px){
+  .menu-toggle{display:flex}
+  nav{display:none;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:var(--sand);border-bottom:1px solid var(--line);padding:1rem clamp(1rem,4vw,4rem) 2rem;max-height:75vh;overflow-y:auto;box-shadow:0 12px 24px rgba(0,0,0,0.1)}
+  .header-open nav{display:flex}
+  nav a{padding:1rem 0;border-bottom:1px solid var(--line);width:100%;text-align:left;font-size:1.1rem}
+  nav a:last-child{border-bottom:none}
+  nav a.active-link{background:transparent;color:var(--clay);padding-left:0.5rem}
+
+  .hero.active-tab,.page-section.active-tab,footer{grid-template-columns:1fr}.hero{min-height:auto}.hero figure,.page-section figure{position:static;aspect-ratio:16/11}.image-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){.brand span{display:none}h1{font-size:clamp(3.4rem,17vw,5rem)}.image-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <a class="brand" href="#hauptmenue">
+    <img src="bilder/logo.jpg" alt="Logo Inke Reimer">
+    <span>guter-reitstall.de</span>
+  </a>
+  <button class="menu-toggle" aria-label="Menü öffnen" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+  <nav>
+    <a href="#hauptmenue">Herzlich Willkommen</a>
+    <a href="#pferde-und-reiter">Ausbildung von Pferd und Reiter</a>
+    <a href="#reitschule">REITSCHULE</a>
+    <a href="#kinderferienspass">Kinderferienspaß</a>
+    <a href="#pension">PENSION</a>
+    <a href="#zucht">Zucht</a>
+    <a href="#verkauf">Verkauf</a>
+    <a href="#aktuelles">Aktuelles</a>
+    <a href="#galerie">Galerie</a>
+    <a href="#impressum">Impressum</a>
+  </nav>
+</header>
+<main>
+  <section id="hauptmenue" class="page-section" data-testid="static-section-hauptmenue">
+    <div class="copy">
+      <p class="eyebrow">Zucht-, Ausbildungs- &amp; Pensionsstall</p>
+      <h2>Herzlich Willkommen</h2>
+      <p>Liebe Reiter, Züchter und Pferdefreunde!</p>
+      <p>Ich freue mich, dass Sie mich gefunden haben. Auf den folgenden Seiten möchte ich Ihnen einen Einblick in meinen Zucht-, Ausbildungs- &amp; und Pensionsstall gewähren. Entdecken Sie meine Reitanlage, informieren Sie sich über meine Zucht und sammeln Sie Eindrücke über meine Tätigkeit als Ausbilderin von Pferden und Reitern. Gerne stehe ich Ihnen mit Rat und Tat zur Seite. Scheuen Sie sich nicht, mich zu kontaktieren.</p>
+      <p>Ihre Inke Reimer</p>
+    </div>
+    <figure><img src="bilder/hero.jpg" alt="Herzlich Willkommen"><figcaption>Herzlich Willkommen</figcaption></figure>
+  </section>
+
+  <section id="pferde-und-reiter" class="page-section" data-testid="static-section-pferde-und-reiter">
+    <div class="copy">
+      <p class="eyebrow">Ausbildung und Beritt</p>
+      <h2>Ausbildung von Pferd und Reiter</h2>
+      <p>Ausbildung und Beritt ist Vertrauenssache!</p>
+      <p>Die schonende und solide Grundausbildung Ihres Youngsters, sowie die gefühlvolle Weiterbildung Ihres Pferdes, stehen für mich an erster Stelle. Grundsätzlich ist eine solide Ausbildung nicht nur für das Pferd sondern auch für jeden Reiter sehr wichtig. Es ist nicht von Bedeutung, ob es sich um einen Freizeitreiter oder einen ambitionierten Turnierreiter handelt, sondern es ist die Harmonie, die zwischen Pferd und Reiter stimmen sollte. Dies möchte ich fördern und Ihre individuellen Ziele mit Ihnen erreichen.</p>
+      <p>Ich biete für Pferd und Reiter eine individuelle Aus- und Weiterbildung im Springen bis zur Klasse S, wobei ich stets pferdegerecht mit den mir anvertrauten Tieren umgehe, sie ihrem Talent entsprechend fördern und nicht überfordere.</p>
+      <p>Sie haben die Wahl zwischen Vollberitt, Teilberitt, Einzelunterricht in Dressur und Springen sowie Gruppenunterricht - auch für Fremdreiter. Darüber hinaus bereite ich Ihre Jungpferde gerne auf die Stutenleistungsprüfung vor.</p>
+      <p>Mein Werdegang: 2002 Pferdewirtschaftsmeisterin FN im Fachbereich Zucht und Haltung; 2004 Pferdewirtschaftsmeisterin FN Fachbereich Reiten; Siegreich in Springen der Klasse S; Teilnehmerin an Deutschen Meisterschaften der Damen; Teilnehmerin an Landesmeisterschaften; Teilnehmerin am Amazonen Derby in Hamburg Klein Flottbek; mehrfach qualifiziert für das Bundeschampionat des Deutschen Springpferdes in Warendorf; zahlreiche Siege und Platzierungen von Springpferde A* bis S**.</p>
+      <p>Des Weiteren konnte ich durch mehrwöchige Trainingsaufenthalte unter anderem bei Peter Luther, Heinrich-Wilhelm Johannsmann (Kaiser) und Werner Peters meine Fähigkeiten und Kenntnisse erweitern!</p>
+    </div>
+    <figure><img src="bilder/pferde-reiter.jpg" alt="Ausbildung von Pferd und Reiter"><figcaption>Ausbildung von Pferd und Reiter</figcaption></figure>
+  </section>
+
+  <section id="reitschule" class="page-section" data-testid="static-section-reitschule">
+    <div class="copy">
+      <p class="eyebrow">Unterricht für jeden Anspruch</p>
+      <h2>REITSCHULE</h2>
+      <p>Unsere Reitschule bietet Unterricht für jeden Anspruch! Bereits Kindern ab 3 Jahren vermitteln wir spielerisch alles Wichtige rund ums Pony und den Einstieg in den Reitsport. Kinder, Jugendliche und Erwachsene fördern wir individuell nach ihren Stärken auf unseren gut ausgebildeten Schulpferden und Ponys. Als Reitlehrerin FN stehe ich für qualifizierten Reitunterricht. Stetige Fort- und Weiterbildungen spiegeln sich in meinem Unterricht wieder. Meine Reitschüler können ebenfalls schon beachtliche sportliche Erfolge bis Klasse M** vorweisen.</p>
+      <p>&quot; Zusammenkunft ist ein Anfang. Zusammenhalt ist ein Fortschritt. Zusammenarbeit ist der Erfolg!&quot; (Henry Ford)</p>
+      <p>Unser Angebot: Erwachsene: Einzel- und Gruppenunterricht auf unseren gut ausgebildeten Pferden. Kinder ab 3 Jahren: Einzel- und Gruppenunterricht für Anfänger und Fortgeschrittene auf gut ausgebildeten Ponys. Jugendliche: Einzel- und Gruppenunterricht für Anfänger und Fortgeschrittene auf gut ausgebildeten Ponys und Pferden.</p>
+      <p>Des weiteren bieten wir bei entsprechenden Kenntnissen und Können Stangen- und Springstunden an. Ausritte bei gutem Wetter werden ebenfalls angeboten!</p>
+    </div>
+    <figure><img src="bilder/reitschule.jpg" alt="REITSCHULE"><figcaption>REITSCHULE</figcaption></figure>
+  </section>
+
+  <section id="kinderferienspass" class="page-section" data-testid="static-section-kinderferienspass">
+    <div class="copy">
+      <p class="eyebrow">Ferienprogramm rund ums Pferd</p>
+      <h2>Kinderferienspaß</h2>
+      <p>Regelmäßig in den schleswig-holsteinischen Schulferien bieten wir ein abwechslungsreiches Ferienprogramm an. Von Montags bis Freitags betreuen wir Ihre Kinder in der Zeit von 9 -16 Uhr mit einem spannenden Programm rund ums Pferd. Tägliches Reiten, Putzen, Spielen, Basteln usw. stehen auf dem Programm. Ein gemeinsames leckeres und gesundes Mittagessen ist inklusive. Außerdem steht für die Kinder Mineralwasser und Apfelschorle zur freien Verfügung bereit. Die Termine werden zeitnah hier bekannt gegeben. Bei offenen Fragen können Sie mich jederzeit kontaktieren.</p>
+    </div>
+    <figure><img src="bilder/ferien.jpg" alt="Kinderferienspaß"><figcaption>Kinderferienspaß</figcaption></figure>
+  </section>
+
+  <section id="pension" class="page-section" data-testid="static-section-pension">
+    <div class="copy">
+      <p class="eyebrow">Wohl des Pferdes an erster Stelle</p>
+      <h2>PENSION</h2>
+      <p>Bei uns steht das Wohl des Pferdes an erster Stelle!</p>
+      <p>Wir bieten einen kompetenten Service in entspannter Atmosphäre rund um das Pferd. Zwei Außenreitplätze sowie eine Reithalle stehen Ihnen für die tägliche Arbeit zur Verfügung. Unser traumhaftes Ausreitgelände schließt sich direkt an unsere großzügigen Koppeln an. Das gemütliche Reiterstübchen mit Terrasse lädt zum verweilen und zum gemütlichen Beisammensein ein. Sie haben die Wahl zwischen Innen- &amp; Außenboxen, In den Sommermonaten besteht die Möglichkeit ihr Pferd 24/7 auf unseren Weiden zu lassen. Im Winter stehen für den täglichen Auslauf mehrere Sandpaddocks zur Verfügung.</p>
+      <p>Hier ein tolles Video über meine Anlage und die Örtlichkeiten:</p>
+    </div>
+    <figure><img src="bilder/pension.jpg" alt="PENSION"><figcaption>PENSION</figcaption></figure>
+  </section>
+
+  <section id="zucht" class="page-section" data-testid="static-section-zucht">
+    <div class="copy">
+      <p class="eyebrow">Holsteiner Zucht &amp; Deutsche Reitponys</p>
+      <h2>Zucht</h2>
+      <p>Wie alles begann...</p>
+      <p>Mit unserer Stammstute Alexa von Ahorn Z x Rubens x Mabuse begann unsere kleine aber feine Holsteiner Zucht. Der Stamm 6407 ist unser Hauptstamm, den wir jetzt in der 5.Generation führen. Des Weiteren sind die Stämme 621 ( Maya 2 von Corrado II x Ahorn Z x Cicero und Emmy Lou R von Chin Champ X Corrado II x Ahorn Z ) und 5953 ( Veela von Corrado I x Sir Shostakovich xx x Ronald) bei uns beheimatet. Darüber hinaus züchten wir auch erfolgreich Deutsche Reitponys ( Dorina von Dakar x Nobel und Helena N von Hondsdrug Don Gregory x Titus, sowie mit Dejavue von Hattrick). Auch unsere Dolce Vita R von Proud Rafaello a.d. Dorina von Dakar (selbst Staatsprämienstute) ist nach ihrer Sportlaufbahn in die Zucht gegangen. Unsere Zuchtstuten sind leistungsgeprüft und verfügen über sportliche Erfolge.</p>
+      <p>Mochito R von Mylord Manolito NRW a.d. Dolce Vita R von Proud Rafaello. Goldstück R, jetzt 4 jährig von Double Cream x Rocketti ist nicht nur ein &quot;HIngucker&quot;, sondern besticht durch ihre Rittigkeit und Einstellung! Unsere beiden Wallache aus *2021, Double Qu R von Dubliner x Corrado I und Clou de la vie von Corfu de la vie x Chin Champ, begeistern uns täglich.</p>
+      <p>Fohlenjahrgang 2023: Ramina R von Madness a.d. Justicia R von Toulon x Cristo x Corrado I; Roulette R von Corfu de la vie a.d. Emmy Lou R von Chin Champ x Corrado II x Ahorn Z; Dark Chocolate R von Proud Rocketti a.d. Dejavue von Hattrick; Don Pappa R von Del Piero a.d Helena von Hondsdrug Don Gregory.</p>
+      <p>Fohlenjahrgang 2022: Holsteiner Stutfohlen von Keaton x Corrado I; Holsteiner Hengstfohlen von Corfu de la vie x Chin Champ (For sale); Holsteiner Hengstfohlen von Daikon x Toulon (For sale); Deutsches Reitpony Stutfohlen von Double Cream x Rocketti; Holsteiner Hengstfohlen von Clarimo x Corrado I; Holsteiner Stutfohlen von Daikon x Cristo.</p>
+    </div>
+    <figure><img src="bilder/zucht-mochito.jpg" alt="Zucht"><figcaption>Zucht</figcaption></figure>
+  </section>
+
+  <section id="verkauf" class="page-section" data-testid="static-section-verkauf">
+    <div class="copy">
+      <p class="eyebrow">Verkaufspferde und -ponys</p>
+      <h2>Verkauf</h2>
+      <p>Wir haben immer einige interessante Verkaufspferde/-ponys aus eigener Zucht im Angebot.</p>
+      <p>Bei Interesse setzten Sie sich bitte telefonisch mit mir in Verbindung!</p>
+    </div>
+    <figure><img src="bilder/ausbildung.jpg" alt="Verkauf"><figcaption>Verkauf</figcaption></figure>
+  </section>
+
+  <section id="aktuelles" class="page-section" data-testid="static-section-aktuelles">
+    <div class="copy">
+      <p class="eyebrow">Neuigkeiten &amp; Impressionen</p>
+      <h2>Aktuelles</h2>
+      <p>Impressionen 2026</p>
+      <p>Abendstimmung, Osterfeuer, Dressurlehrgang, Floki, Entspannung, Ahlmann Masters.</p>
+      <p>Wir haben uns von dem RuFv Birkengrund - Schönhorst e.V. für das große Finale der besten 5 Mannschaften im Februar bei den VR Classics 2026 qualifiziert! Röschmann Team Trophy. gemeinsamer Turniertag, unser Smiley Pferd, Schimmelliebe. Stall- Feeling :-). unser Smiley im Stall. Schimmelpower.</p>
+      <p>Springlehrgang 2024: 18 motivierte Teilnehmer... ersten Tag Stangenarbeit mit Kringel und Kreisen, 2. Tag Parcoursspringen. Alle hatten viel Spaß und starten jetzt motiviert in die Saison.</p>
+      <p>VR Classics in den Holstenhallen Nms 2024. Finale Mannschaftsspringen der Reitsport Sievers Trophy. Das letzte Quäntchen Glück fehlte uns heute. Vielen Dank an Reitsport.Sievers für die Ausrichtung dieser Prüfung! Wir, als Verein RuFV Birkengrund.Schoenhorst, freuen uns sehr an diesem Finale teilgenommen haben zu können. Und starten motiviert in die neue Mannschaftssaison.</p>
+      <p>Reitabzeichen 2023 🌞 RA5 und PFU 🐎. Tolles Wetter, gute Laune und etwas Aufregung 😁. Alle bestanden und alle glücklich.👍🎉</p>
+    </div>
+    <figure><img src="bilder/aktuelles-2026.jpg" alt="Aktuelles"><figcaption>Aktuelles</figcaption></figure>
+  </section>
+
+  <section id="galerie" class="page-section" data-testid="static-section-galerie">
+    <div class="copy">
+      <p class="eyebrow">Bilder, Teams &amp; Stallmomente</p>
+      <h2>Galerie</h2>
+      <p>Double Qu R und Clou de la vie R</p>
+      <p>Spannung, Spaß und Teamfeeling 2025: IMG-20250525-WA0011, Prüfung beobachten, Chillen, Ruhemodus, Entspannung zw. den Prüfungen, Team, Großeltern mit der Enkelin, Team im Sonnenschein, bester Floki, Vorbereitung, Freude beim Einreiten, Röschmann Team Trophy.</p>
+      <p>Weitere Eindrücke: Neele &amp; Cheker, Frühling 2023, Klein Marie im Apfelgarten, Ramina R, Goldstück R, Floki, Roulette R, Linea R, bisheriges 8er Team 2022, Turniere 2022, Herbstferienlehrgang, Moritz, Justicia R, Weihnachtsstimmung, GALERIE.</p>
+    </div>
+    <figure><img src="bilder/galerie-team.jpg" alt="Galerie"><figcaption>Galerie</figcaption></figure>
+  </section>
+
+  <section class="gallery">
+    <p class="eyebrow">Bilddateien</p>
+    <h2>Mitgelieferte Bilder</h2>
+    <div class="image-grid">
+      <img src="bilder/aktuelles-2026.jpg" alt="aktuelles-2026">
+      <img src="bilder/aktuelles-oster.jpg" alt="aktuelles-oster">
+      <img src="bilder/ausbildung.jpg" alt="ausbildung">
+      <img src="bilder/ferien.jpg" alt="ferien">
+      <img src="bilder/galerie-clou.jpg" alt="galerie-clou">
+      <img src="bilder/galerie-double-qu.jpg" alt="galerie-double-qu">
+      <img src="bilder/galerie-team.jpg" alt="galerie-team">
+      <img src="bilder/hero.jpg" alt="hero">
+      <img src="bilder/home-2.jpg" alt="home-2">
+      <img src="bilder/logo.jpg" alt="logo">
+      <img src="bilder/pension-2.jpg" alt="pension-2">
+      <img src="bilder/pension.jpg" alt="pension">
+      <img src="bilder/pferde-reiter.jpg" alt="pferde-reiter">
+      <img src="bilder/reitschule-2.jpg" alt="reitschule-2">
+      <img src="bilder/reitschule.jpg" alt="reitschule">
+      <img src="bilder/zucht-double-qu.jpg" alt="zucht-double-qu">
+      <img src="bilder/zucht-goldstueck.jpg" alt="zucht-goldstueck">
+      <img src="bilder/zucht-mochito.jpg" alt="zucht-mochito">
+    </div>
+  </section>
+
+  <section id="impressum" class="page-section" data-testid="static-section-impressum">
+    <div class="copy">
+      <p class="eyebrow">Adresse, Kontakt &amp; Datenschutz</p>
+      <h2>Impressum</h2>
+      <p>Adresse: Inke Reimer, Bisseer Weg 24, 24220 Schönhorst. Mobil: +49 (0) 176 21807972. info@guter-reitstall.de. Sitz des Amtsgerichtes: Rendsburg.</p>
+      <p>Mit Urteil vom 12. Mai 1998 - Az. 312 O 85/98 - Haftung für Links; hat das Landgericht (LG) Hamburg entschieden, dass man durch die Erstellung eines Links, die Inhalte der gelinkten Seite ggf. mit zu verantworten hat. Dies kann - so das Gericht - nur dadurch verhindert werden, dass man sich ausdrücklich von diesen Inhalten distanziert. Da guter-reitstall.de keinerlei Einfluss auf die Gestaltung und die Inhalte der gelinkten Seiten hat, distanziere ich mich ausdrücklich von den Inhalten aller Seiten, die sich nicht auf diesem Server befinden oder über die Suchabfragen gefunden werden können!</p>
+      <p>Datenschutzerklärung: Im folgenden informiere ich darüber, welche Daten von den Nutzern meiner Webseite erhoben werden. Die Nutzung meiner Webseite ist in erster Linie für jeden ohne die Angabe von personenbezogenen Daten möglich.</p>
+      <p>Server-Log-Files: IP-Adresse, Web-Browser und -version, Datum und Uhrzeit der Serveranfrage, Anzahl der abgerufenen Dateien, Provider. Die aufgeführten Informationen werden keinen bestimmten Personen zugeordnet und nach maximal sieben Tagen gelöscht. Sie dienen lediglich der Erkennung und Abwehr von Angriffen.</p>
+      <p>Erhebung und Nutzung von Daten: Sollten Sie mich per Mail, per Post oder per Telefon kontaktieren, habe ausschließlich ich Zugriff auf die von Ihnen übermittelten Daten. Diese Daten werden nur zur Bearbeitung Ihres Anliegens verwendet und nicht langfristig gespeichert oder an Dritte übermittelt.</p>
+      <p>Cookies: Meine Webseite verwendet Cookies (kleine Textdateien), um einige Funktionen zu ermöglichen. Einige Cookies werden auf Ihrem Endgerät gespeichert. Sie richten keinen Schaden an. Sie ermöglichen lediglich eine Nutzerfreundliche Nutzung meiner Webseite. Andere sogenannte Session Cookies werden direkt beim Schließen des Browsers gelöscht.</p>
+      <p>Facebook: Auf meiner Webseite verwende ich das Social Plugin des sozialen Netzwerkes facebook.com (Facebook Inc. / USA - im weiteren Anbieter). Durch die Nutzung meiner Webseite wird eine Verbindung zwischen Ihrem Browser und dem Server des Anbieters hergestellt.</p>
+      <p>Kontakt bei Fragen zu meinen Datenschutzhinweisen: Handy: 0176-21807972. info@guter-reitstall.de. Verantwortlich für den Inhalt: Inke Reimer.</p>
+    </div>
+    <figure><img src="bilder/home-2.jpg" alt="Impressum"><figcaption>Impressum</figcaption></figure>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <p class="eyebrow">Kontakt</p>
+    <h2>Gerne stehe ich Ihnen mit Rat und Tat zur Seite.</h2>
+  </div>
+  <div>
+    <p>Inke Reimer</p>
+    <p>Bisseer Weg 24, 24220 Schönhorst</p>
+    <p><a href="tel:017621807972">+49 (0) 176 21807972</a></p>
+    <p><a href="mailto:info@guter-reitstall.de">info@guter-reitstall.de</a></p>
+  </div>
+</footer>
+
+<script>
+// Steuert das mobile Hamburger-Menü
+function toggleMenu() {
+  if (window.innerWidth <= 1000) {
+    document.body.classList.toggle('header-open');
+  }
+}
+
+// Steuert das Umschalten der Tabs
+function switchTab() {
+  // Wenn kein Hash gesetzt ist, wechsle standardmäßig auf das Hauptmenü
+  const hash = window.location.hash || '#hauptmenue';
+  
+  // Schließt das mobile Menü automatisch nach Klick
+  document.body.classList.remove('header-open');
+  
+  // Alle Tabs und Bilder-Galerien unsichtbar machen
+  document.querySelectorAll('.hero, .page-section, .gallery').forEach(function(section) {
+    section.classList.remove('active-tab');
+  });
+  
+  // Aktiven Link im Menü zurücksetzen
+  document.querySelectorAll('nav a').forEach(function(link) {
+    link.classList.remove('active-link');
+  });
+  
+  if (hash === '#hauptmenue') {
+    // Zeige beim Willkommens-Tab sowohl das obere Hero-Banner als auch den Hauptmenü-Inhalt
+    const hero = document.querySelector('.hero');
+    const hauptmenue = document.getElementById('hauptmenue');
+    if (hero) hero.classList.add('active-tab');
+    if (hauptmenue) hauptmenue.classList.add('active-tab');
+  } else {
+    // Andernfalls den passenden ID-Abschnitt einblenden
+    const targetSection = document.querySelector(hash);
+    if (targetSection) {
+      targetSection.classList.add('active-tab');
+    }
+    // Wenn die Galerie gewählt ist, blende auch das Grid mit den mitgelieferten Bildern ein
+    if (hash === '#galerie') {
+      const galleryGrid = document.querySelector('.gallery');
+      if (galleryGrid) galleryGrid.classList.add('active-tab');
+    }
+  }
+  
+  // Menüpunkt optisch als aktiv markieren
+  const activeLink = document.querySelector(`nav a[href="${hash}"]`);
+  if (activeLink) {
+    activeLink.classList.add('active-link');
+  }
+  
+  // Scrollt sanft an den Seitenanfang zurück, damit der neue Tab von oben gelesen werden kann
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Event-Listener für URL-Wechsel und initiales Laden hinzufügen
+window.addEventListener('hashchange', switchTab);
+window.addEventListener('DOMContentLoaded', switchTab);
+</script>
+</body>
+</html>
